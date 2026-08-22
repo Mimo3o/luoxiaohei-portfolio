@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>罗小黑战记 · 手游UI设计 | 作品集</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    background: #F7F3E8;
+    color: #2C3E2C;
+    line-height: 1.7;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+  /* ===== 封面 ===== */
+  .hero {
+    background: linear-gradient(135deg, #2E5D2E 0%, #4A8B3A 50%, #8BC34A 100%);
+    color: #F7F3E8;
+    padding: 100px 40px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(212,225,87,0.1) 0%, transparent 40%);
+    animation: float 20s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-20px, -20px); }
+  }
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 16px;
+    position: relative;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  }
+  .hero .subtitle {
+    font-size: 20px;
+    opacity: 0.9;
+    margin-bottom: 32px;
+    position: relative;
+    letter-spacing: 2px;
+  }
+  .hero .tags {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero .tag {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* ===== 通用区块 ===== */
+  section { padding: 70px 0; }
+  section:nth-child(even) { background: #EFE9D8; }
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2E5D2E;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::before {
+    content: "";
+    width: 6px; height: 28px;
+    background: linear-gradient(180deg, #4A8B3A, #8BC34A);
+    border-radius: 3px;
+  }
+  .section-desc {
+    color: #6B7C6B;
+    font-size: 15px;
+    margin-bottom: 36px;
+    padding-left: 18px;
+  }
+
+  /* ===== 项目概述 ===== */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .overview-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px;
+    border-left: 4px solid #4A8B3A;
+    box-shadow: 0 2px 12px rgba(46,93,46,0.06);
+  }
+  .overview-card h3 {
+    font-size: 17px;
+    color: #2E5D2E;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .overview-card h3 .icon {
+    width: 28px; height: 28px;
+    background: #E8F0E0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+  .overview-card p { font-size: 14px; color: #4A5A4A; }
+  .overview-card ul { list-style: none; font-size: 14px; color: #4A5A4A; }
+  .overview-card li { padding: 4px 0; padding-left: 16px; position: relative; }
+  .overview-card li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: #4A8B3A;
+    font-weight: bold;
+  }
+
+  /* ===== 关键词 ===== */
+  .keywords {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px 0;
+  }
+  .keyword {
+    background: #fff;
+    padding: 16px 36px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2E5D2E;
+    box-shadow: 0 4px 16px rgba(46,93,46,0.08);
+    border: 2px solid transparent;
+    transition: all 0.3s;
+  }
+  .keyword:hover {
+    border-color: #8BC34A;
+    transform: translateY(-2px);
+  }
+
+  /* ===== 配色规范 ===== */
+  .color-group { margin-bottom: 32px; }
+  .color-group-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #4A5A4A;
+    margin-bottom: 14px;
+    padding-left: 8px;
+    border-left: 3px solid #8BC34A;
+  }
+  .color-palette {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 14px;
+  }
+  .color-swatch {
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .color-swatch .swatch-top {
+    height: 80px;
+    position: relative;
+  }
+  .color-swatch .swatch-info {
+    padding: 10px 12px;
+  }
+  .color-swatch .swatch-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2C3E2C;
+    margin-bottom: 2px;
+  }
+  .color-swatch .swatch-hex {
+    font-size: 11px;
+    color: #888;
+    font-family: monospace;
+  }
+
+  /* ===== 字体规范 ===== */
+  .type-scale {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 2px 12px rgba(46,93,46,0.06);
+  }
+  .type-row {
+    display: flex;
+    align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px dashed #E0D8C4;
+    gap: 24px;
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-preview { flex: 1; }
+  .type-meta {
+    width: 200px;
+    text-align: right;
+    font-size: 12px;
+    color: #888;
+    font-family: monospace;
+  }
+  .type-h1 { font-size: 32px; font-weight: 800; color: #2E5D2E; }
+  .type-h2 { font-size: 24px; font-weight: 700; color: #2E5D2E; }
+  .type-h3 { font-size: 18px; font-weight: 600; color: #4A5A4A; }
+  .type-body { font-size: 16px; font-weight: 400; color: #4A5A4A; }
+  .type-caption { font-size: 14px; font-weight: 400; color: #6B7C6B; }
+  .type-mini { font-size: 12px; font-weight: 400; color: #888; }
+
+  /* ===== 组件规范 ===== */
+  .component-section { margin-bottom: 36px; }
+  .component-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #4A5A4A;
+    margin-bottom: 14px;
+    padding-left: 8px;
+    border-left: 3px solid #8BC34A;
+  }
+  .component-demo {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 2px 12px rgba(46,93,46,0.06);
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn {
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #8B6B3D, #A67C52);
+    color: #F7F3E8;
+    box-shadow: 0 3px 10px rgba(139,107,61,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 5px 16px rgba(139,107,61,0.4); }
+  .btn-secondary {
+    background: #fff;
+    color: #4A8B3A;
+    border: 2px solid #4A8B3A;
+  }
+  .btn-secondary:hover { background: #F0F5E8; }
+  .btn-text {
+    background: transparent;
+    color: #4A8B3A;
+    padding: 8px 16px;
+  }
+  .btn-text:hover { text-decoration: underline; }
+  .btn-disabled {
+    background: #D5D0C0;
+    color: #999;
+    cursor: not-allowed;
+  }
+
+  .card-demo {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .ui-card {
+    width: 200px;
+    background: #FDFBF3;
+    border-radius: 12px;
+    border: 2px solid #C4A77D;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(139,107,61,0.15);
+  }
+  .ui-card .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2E5D2E;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .ui-card .card-content {
+    font-size: 13px;
+    color: #6B7C6B;
+    line-height: 1.8;
+  }
+  .ui-card-dark {
+    background: linear-gradient(135deg, #3A6B3A, #2E5D2E);
+    border-color: #4A8B3A;
+  }
+  .ui-card-dark .card-title { color: #F7F3E8; }
+  .ui-card-dark .card-content { color: rgba(247,243,232,0.8); }
+
+  .resource-bar-demo {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .res-item {
+    background: rgba(46,93,46,0.85);
+    backdrop-filter: blur(10px);
+    padding: 6px 16px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #F7F3E8;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .res-icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+
+  .nav-demo {
+    display: flex;
+    background: linear-gradient(180deg, rgba(46,93,46,0.9), rgba(46,93,46,0.95));
+    border-radius: 16px 16px 0 0;
+    padding: 12px 0;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 500px;
+  }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: rgba(247,243,232,0.7);
+    font-size: 12px;
+  }
+  .nav-item.active { color: #D4E157; }
+  .nav-icon {
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+  .nav-item.active .nav-icon { background: rgba(212,225,87,0.2); }
+
+  /* ===== 流程图 ===== */
+  .flowchart {
+    background: #fff;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 2px 12px rgba(46,93,46,0.06);
+    overflow-x: auto;
+  }
+  .flow-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .flow-node {
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 100px;
+  }
+  .flow-start {
+    background: linear-gradient(135deg, #2E5D2E, #4A8B3A);
+    color: #F7F3E8;
+    box-shadow: 0 3px 10px rgba(46,93,46,0.3);
+  }
+  .flow-main {
+    background: linear-gradient(135deg, #8B6B3D, #A67C52);
+    color: #F7F3E8;
+    box-shadow: 0 3px 10px rgba(139,107,61,0.3);
+  }
+  .flow-sub {
+    background: #F0EAD6;
+    color: #4A5A4A;
+    border: 2px solid #C4A77D;
+  }
+  .flow-end {
+    background: linear-gradient(135deg, #D4A843, #E8C84A);
+    color: #2E5D2E;
+    box-shadow: 0 3px 10px rgba(212,168,67,0.3);
+  }
+  .flow-arrow {
+    font-size: 20px;
+    color: #8BC34A;
+    font-weight: bold;
+  }
+  .flow-branch {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  /* ===== 界面展示 ===== */
+  .screens-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .screen-item {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(46,93,46,0.08);
+  }
+  .screen-item img {
+    width: 100%;
+    display: block;
+  }
+  .screen-caption {
+    padding: 20px 28px;
+    border-top: 1px solid #EFE9D8;
+  }
+  .screen-caption h4 {
+    font-size: 17px;
+    color: #2E5D2E;
+    margin-bottom: 6px;
+  }
+  .screen-caption p {
+    font-size: 13px;
+    color: #6B7C6B;
+  }
+  .screen-caption .design-note {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: #F5F0E0;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #5A6A5A;
+    border-left: 3px solid #8BC34A;
+  }
+
+  /* ===== 页脚 ===== */
+  footer {
+    background: #2E5D2E;
+    color: rgba(247,243,232,0.7);
+    text-align: center;
+    padding: 40px;
+    font-size: 13px;
+  }
+  footer .footer-title {
+    color: #F7F3E8;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .container { padding: 0 20px; }
+    .hero h1 { font-size: 32px; }
+    .overview-grid { grid-template-columns: 1fr; }
+    .type-row { flex-direction: column; gap: 8px; }
+    .type-meta { text-align: left; width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== 封面 ===== -->
+<div class="hero">
+  <h1>众生之门</h1>
+  <div class="subtitle">罗小黑战记 · 手游UI概念设计</div>
+  <div class="tags">
+    <span class="tag">游戏UI</span>
+    <span class="tag">二次元</span>
+    <span class="tag">手绘风格</span>
+    <span class="tag">个人项目</span>
+  </div>
+</div>
+
+<!-- ===== 项目概述 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">项目概述</div>
+    <div class="section-desc">将动画中虚构的游戏"众生之门"带入现实的手游UI概念设计</div>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <h3><span class="icon">📖</span>项目背景</h3>
+        <p>《罗小黑战记》是国产动画中的治愈系代表作，以"妖精与人类共存"为核心世界观。TV版剧情中出现了一款名为"众生之门"的虚拟游戏，在剧情中占据重要比重，是角色进入妖精世界、展开冒险的关键场景。本项目尝试将动画中虚构的"众生之门"带入现实，以原作的手绘美术风格为基础，设计一套完整的手游界面体系，让粉丝有机会真正"进入"这个游戏世界。</p>
+      </div>
+      <div class="overview-card">
+        <h3><span class="icon">🎯</span>设计目标</h3>
+        <ul>
+          <li>还原罗小黑原作的手绘美术风格与森林自然主题</li>
+          <li>将TV版中"众生之门"的游戏设定具象化为可交互界面</li>
+          <li>建立统一的视觉规范，确保多界面一致性</li>
+          <li>覆盖手游核心玩法场景，形成完整流程</li>
+          <li>在视觉表现与交互效率之间取得平衡</li>
+        </ul>
+      </div>
+      <div class="overview-card">
+        <h3><span class="icon">👥</span>目标用户</h3>
+        <ul>
+          <li>核心用户：罗小黑动画粉丝（15-25岁）</li>
+          <li>泛用户：喜爱清新治愈风格的二次元手游玩家</li>
+          <li>用户特征：注重美术品质、偏好轻松休闲玩法</li>
+        </ul>
+      </div>
+      <div class="overview-card">
+        <h3><span class="icon">⚔️</span>核心玩法</h3>
+        <ul>
+          <li>角色收集与养成（招募系统）</li>
+          <li>妖精冒险战斗（秘境挑战）</li>
+          <li>角色装扮与捏脸（个性化系统）</li>
+          <li>每日任务与活动（长线留存）</li>
+        </ul>
+      </div>
+      <div class="overview-card">
+        <h3><span class="icon">📅</span>项目周期</h3>
+        <p>个人独立项目，设计周期约3周。完成7个核心界面的UI设计，涵盖登录、主界面、角色、招募、装扮、战斗、活动等关键场景。</p>
+      </div>
+      <div class="overview-card">
+        <h3><span class="icon">🛠️</span>设计工具</h3>
+        <p>AIGC（辅助）、Photoshop（插画与素材处理）</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 设计关键词 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">设计关键词</div>
+    <div class="section-desc">贯穿整个项目的视觉与体验调性</div>
+    <div class="keywords">
+      <span class="keyword">🌿 治愈</span>
+      <span class="keyword">🌲 自然</span>
+      <span class="keyword">✏️ 手绘</span>
+      <span class="keyword">🧚 妖精</span>
+      <span class="keyword">⚔️ 冒险</span>
+      <span class="keyword">☀️ 温暖</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 配色规范 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">配色规范</div>
+    <div class="section-desc">以森林绿为主色调，木色与米白为辅助，构建自然治愈的色彩体系</div>
+
+    <div class="color-group">
+      <div class="color-group-label">主色系 · Primary</div>
+      <div class="color-palette">
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#2E5D2E"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">森林深绿</div>
+            <div class="swatch-hex">#2E5D2E</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#4A8B3A"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">叶片绿</div>
+            <div class="swatch-hex">#4A8B3A</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#8BC34A"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">嫩绿</div>
+            <div class="swatch-hex">#8BC34A</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#D4E157"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">光束黄绿</div>
+            <div class="swatch-hex">#D4E157</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="color-group">
+      <div class="color-group-label">辅助色系 · Secondary</div>
+      <div class="color-palette">
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#8B6B3D"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">木纹棕</div>
+            <div class="swatch-hex">#8B6B3D</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#C4A77D"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">浅木色</div>
+            <div class="swatch-hex">#C4A77D</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#D4A843"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">金色</div>
+            <div class="swatch-hex">#D4A843</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#F7F3E8"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">米白</div>
+            <div class="swatch-hex">#F7F3E8</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="color-group">
+      <div class="color-group-label">文字与中性色 · Text & Neutral</div>
+      <div class="color-palette">
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#2C3E2C"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">主文字</div>
+            <div class="swatch-hex">#2C3E2C</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#4A5A4A"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">正文</div>
+            <div class="swatch-hex">#4A5A4A</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#6B7C6B"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">辅助文字</div>
+            <div class="swatch-hex">#6B7C6B</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#9E9E9E"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">禁用/占位</div>
+            <div class="swatch-hex">#9E9E9E</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="color-group">
+      <div class="color-group-label">功能色 · Semantic</div>
+      <div class="color-palette">
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#689F38"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">成功/完成</div>
+            <div class="swatch-hex">#689F38</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#E8A33D"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">警告/提示</div>
+            <div class="swatch-hex">#E8A33D</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#D32F2F"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">危险/消耗</div>
+            <div class="swatch-hex">#D32F2F</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#1976D2"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">信息/链接</div>
+            <div class="swatch-hex">#1976D2</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 字体规范 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">字体规范</div>
+    <div class="section-desc">统一的字号层级，确保信息传达的清晰与秩序</div>
+    <div class="type-scale">
+      <div class="type-row">
+        <div class="type-preview type-h1">大标题 / Page Title</div>
+        <div class="type-meta">32px / Bold / 行高 1.3</div>
+      </div>
+      <div class="type-row">
+        <div class="type-preview type-h2">页面标题 / Section Title</div>
+        <div class="type-meta">24px / Bold / 行高 1.4</div>
+      </div>
+      <div class="type-row">
+        <div class="type-preview type-h3">卡片标题 / Card Title</div>
+        <div class="type-meta">18px / SemiBold / 行高 1.4</div>
+      </div>
+      <div class="type-row">
+        <div class="type-preview type-body">正文内容 / Body Text —— 妖精与人类共存的世界</div>
+        <div class="type-meta">16px / Regular / 行高 1.7</div>
+      </div>
+      <div class="type-row">
+        <div class="type-preview type-caption">辅助说明 / Caption —— 活动时间：8月17日-8月31日</div>
+        <div class="type-meta">14px / Regular / 行高 1.6</div>
+      </div>
+      <div class="type-row">
+        <div class="type-preview type-mini">标签小字 / Label —— Lv.58 · 战斗力 888,888</div>
+        <div class="type-meta">12px / Regular / 行高 1.5</div>
+      </div>
+    </div>
+    <div style="margin-top:20px; padding:16px 20px; background:#F5F0E0; border-radius:8px; font-size:13px; color:#5A6A5A;">
+      <strong>字体选择：</strong>中文使用「游趣体。游戏内标题文字可根据场景使用手写体增强手绘感，但正文与数字必须使用无衬线字体保证可读性。
+    </div>
+  </div>
+</section>
+
+<!-- ===== 组件规范 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">组件规范</div>
+    <div class="section-desc">可复用的UI组件库，确保全产品一致性</div>
+
+    <div class="component-section">
+      <div class="component-label">按钮系统 · Buttons</div>
+      <div class="component-demo" style="flex-direction:column; align-items:stretch; gap:16px;">
+        <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center; justify-content:center;">
+          <div style="text-align:center;">
+            <img src="images/btn_start.png" style="max-height:80px; border-radius:6px;" alt="主按钮-开始冒险">
+            <div style="font-size:11px; color:#888; margin-top:6px;">主按钮 · 开始冒险</div>
+          </div>
+          <div style="text-align:center;">
+            <img src="images/btn_gacha_group.png" style="max-height:80px; border-radius:6px;" alt="按钮组-招募十次/一次">
+            <div style="font-size:11px; color:#888; margin-top:6px;">主+次按钮 · 招募组</div>
+          </div>
+          <div style="text-align:center;">
+            <img src="images/btn_activity.png" style="max-height:70px; border-radius:6px;" alt="活动按钮-前往参与">
+            <div style="font-size:11px; color:#888; margin-top:6px;">活动按钮 · 前往参与</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:12px; font-size:12px; color:#6B7C6B; padding-left:8px;">
+        主按钮采用木牌造型+叶片装饰，用于页面唯一核心操作（如开始冒险、招募十次），每页最多一个；次按钮为绿色描边造型（招募一次）；活动按钮为绿色实底造型（前往参与）。所有按钮统一木牌/叶片装饰语言，与森林自然主题呼应。
+      </div>
+    </div>
+
+    <div class="component-section">
+      <div class="component-label">卡片系统 · Cards</div>
+      <div class="component-demo" style="align-items:flex-start; gap:24px;">
+        <div style="text-align:center; flex:1;">
+          <img src="images/card_quest.png" style="max-height:320px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1);" alt="每日任务卡片">
+          <div style="font-size:11px; color:#888; margin-top:8px;">任务卡片 · 每日任务</div>
+        </div>
+        <div style="text-align:center; flex:1;">
+          <img src="images/card_player.png" style="max-height:180px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1);" alt="玩家信息卡片">
+          <div style="font-size:11px; color:#888; margin-top:8px;">信息卡片 · 玩家信息</div>
+        </div>
+      </div>
+      <div style="margin-top:12px; font-size:12px; color:#6B7C6B; padding-left:8px;">
+        卡片采用金色描边+藤蔓叶片装饰，木纹标题栏承载标题，半透明面板背景保证背景插画可见。分为任务类卡片（大尺寸，含列表+操作按钮）和信息类卡片（小尺寸，含头像+基础属性）两种类型，统一装饰语言。
+      </div>
+    </div>
+
+    <div class="component-section">
+      <div class="component-label">任务面板 · Quest Panel</div>
+      <div class="component-demo" style="align-items:flex-start; gap:32px;">
+        <div style="flex:0 0 260px;">
+          <img src="images/component_quest_panel.png" style="width:100%; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.1);" alt="每日任务面板">
+        </div>
+        <div style="flex:1; font-size:13px; color:#4A5A4A; line-height:2;">
+          <p style="font-weight:700; color:#2E5D2E; font-size:14px; margin-bottom:8px;">结构组成</p>
+          <p>· 木纹标题栏：金色描边 + 藤蔓装饰，承载面板标题</p>
+          <p>· 任务列表区：图标 + 任务名 + 进度，统一行高与间距</p>
+          <p>· 分隔线：细分隔线区分列表区与操作区</p>
+          <p>· 操作按钮："领取奖励"描边文字按钮，状态可切换</p>
+          <p style="font-weight:700; color:#2E5D2E; font-size:14px; margin:14px 0 8px;">设计规范</p>
+          <p>· 边框：金色 2px 描边，四角切角处理，区别于普通圆角卡片</p>
+          <p>· 背景：半透明灰色面板，保证背景插画可见且文字可读</p>
+          <p>· 装饰：四角藤蔓叶片，强化自然主题，与整体风格统一</p>
+          <p>· 适用场景：每日任务、活动任务、成就面板、限时挑战</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="component-section">
+      <div class="component-label">资源栏 · Resource Bar</div>
+      <div class="component-demo">
+        <img src="images/component_resbar.png" style="max-height:60px; width:100%; max-width:700px; border-radius:6px;" alt="资源栏">
+      </div>
+      <div style="margin-top:12px; font-size:12px; color:#6B7C6B; padding-left:8px;">
+        资源栏固定在屏幕右上角，采用半透明深绿胶囊样式，图标+文字组合。金币与妖晶为全局常驻货币，草药/卷轴/秘卷等玩法资源按场景按需显示，增减时带淡入淡出过渡动画。
+      </div>
+    </div>
+
+    <div class="component-section">
+      <div class="component-label">底部导航 · Tab Bar</div>
+      <div class="component-demo" style="padding:0;">
+        <img src="images/component_nav.png" style="width:100%; border-radius:8px;" alt="底部导航栏">
+      </div>
+      <div style="margin-top:12px; font-size:12px; color:#6B7C6B; padding-left:8px;">
+        底部导航采用与场景融合的设计，左侧为队伍/背包/任务三个功能入口，中央"开始冒险"为核心CTA按钮（木牌造型突出），右侧为会馆/商店/图鉴。选中态使用高亮描边图标，未选中态为半透明。导航栏与背景插画自然融合，弱化机械感。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 用户流程图 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">用户流程图</div>
+    <div class="section-desc">从进入游戏到核心玩法的完整用户路径</div>
+    <div class="flowchart">
+      <div class="flow-row">
+        <div class="flow-node flow-start">启动游戏</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node flow-start">登录页</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node flow-main">主界面</div>
+      </div>
+      <div class="flow-row" style="margin-top:30px;">
+        <div class="flow-node flow-main">主界面</div>
+        <div class="flow-branch">
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-sub">开始冒险</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-end">战斗界面</div>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-node flow-main">主界面</div>
+        <div class="flow-branch">
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-sub">招募入口</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-sub">招募页</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-end">抽卡结果</div>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-node flow-main">主界面</div>
+        <div class="flow-branch">
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-sub">角色入口</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-sub">角色选择</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-end">装扮/捏脸</div>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-node flow-main">主界面</div>
+        <div class="flow-branch">
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-sub">活动弹窗</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-sub">活动详情</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-end">参与活动</div>
+        </div>
+      </div>
+      <div class="flow-row" style="margin-top:30px; border-top:2px dashed #E0D8C4; padding-top:20px;">
+        <div class="flow-node flow-sub">底部导航</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node flow-sub">队伍 / 背包 / 任务 / 商店 / 图鉴</div>
+        <span class="flow-arrow">↩</span>
+        <div class="flow-node flow-main">返回主界面</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 界面展示 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">界面展示</div>
+    <div class="section-desc">7个核心界面的设计成果</div>
+    <div class="screens-grid">
+
+      <div class="screen-item">
+        <img src="images/screen_login.jpg" alt="登录页">
+        <div class="screen-caption">
+          <h4>01 · 登录页</h4>
+          <p>"众生之门"的入口界面，以罗小黑角色群像森林插画为主体，营造治愈的第一印象。</p>
+          <div class="design-note">设计要点：中央"点击进入游戏"为唯一主操作；右上角放置音量、客服、设置辅助功能；底部合规展示健康游戏提示。角色群像插画强化IP辨识度，呼应TV版中"众生之门"的游戏启动场景。</div>
+        </div>
+      </div>
+
+      <div class="screen-item">
+        <img src="images/screen_home.png" alt="主界面">
+        <div class="screen-caption">
+          <h4>02 · 主界面（会馆）</h4>
+          <p>游戏的核心枢纽页面，整合玩家信息、每日任务、功能入口、资源状态和底部导航。</p>
+          <div class="design-note">设计要点：中央角色立绘为视觉焦点；左侧每日任务面板引导日常行为；右侧功能入口（秘境挑战、训练营、角色、招募）按优先级排列；底部"开始冒险"为核心CTA；顶部资源栏展示金币、草药、妖晶。会馆对应原作中妖精聚集的核心场景。</div>
+        </div>
+      </div>
+
+      <div class="screen-item">
+        <img src="images/screen_character.png" alt="角色选择">
+        <div class="screen-caption">
+          <h4>03 · 角色选择 / 图鉴</h4>
+          <p>展示已收集角色，支持左右翻页浏览，右侧五行属性雷达图呈现角色能力分布。</p>
+          <div class="design-note">设计要点：左侧4×4角色头像网格支持快速切换；中央大立绘展示选中角色；右侧金木水火土五行雷达图直观呈现属性，五行设定源自原作的妖精能力体系；"去招募"按钮引导未收集角色的获取路径。</div>
+        </div>
+      </div>
+
+      <div class="screen-item">
+        <img src="images/screen_gacha.png" alt="招募页">
+        <div class="screen-caption">
+          <h4>04 · 招募（抽卡）页</h4>
+          <p>角色获取的核心页面，以当期UP角色"无限"为视觉中心，两侧展示可获取角色。</p>
+          <div class="design-note">设计要点：中央大立绘突出当期UP角色；灯笼形角色卡呼应东方主题；"招募十次"为主按钮，"招募一次"为次按钮，层级分明；右侧"有生之年"为活动主题标识；底部限时礼包与限时任务为附加转化入口。</div>
+        </div>
+      </div>
+
+      <div class="screen-item">
+        <img src="images/screen_dressup.png" alt="装扮捏脸">
+        <div class="screen-caption">
+          <h4>05 · 装扮 / 捏脸页</h4>
+          <p>角色个性化系统，支持服装更换与面部细节微调，藤蔓边框强化自然主题。</p>
+          <div class="design-note">设计要点：三栏布局（服装选择-角色预览-面部调节）操作路径清晰；顶部分类标签切换服装/配饰/脸型/发型；右侧滑块支持额头、颧骨、脸颊、下巴精细调节；分页指示器表明多页服装可选。</div>
+        </div>
+      </div>
+
+      <div class="screen-item">
+        <img src="images/screen_battle.png" alt="战斗页">
+        <div class="screen-caption">
+          <h4>06 · 战斗界面</h4>
+          <p>实时战斗场景，竹林水域背景，角色释放雷电技能，经典手游战斗操作布局。</p>
+          <div class="design-note">设计要点：左下角虚拟摇杆控制移动；右下角技能按钮释放技能；左上角头像+血条/蓝条展示角色状态；右侧竖排功能按钮（任务、设置、商店、聊天）；技能特效与场景风格统一，还原原作中妖精战斗的视觉表现。</div>
+        </div>
+      </div>
+
+      <div class="screen-item">
+        <img src="images/screen_activity.png" alt="活动弹窗">
+        <div class="screen-caption">
+          <h4>07 · 活动弹窗</h4>
+          <p>"有生之年"系列活动的宣传弹窗，进入游戏时触发，展示活动内容与新角色。</p>
+          <div class="design-note">设计要点：水彩笔触标题"有生之年"强化活动氛围；左侧活动内容说明清晰传达玩法与时间；右侧角色竖排展示新伙伴；"前往参与"为行动号召按钮；"今日不再提醒"选项尊重用户体验。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 项目总结 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">项目总结</div>
+    <div class="section-desc">设计收获与后续优化方向</div>
+    <div class="overview-grid">
+      <div class="overview-card" style="border-left-color:#689F38;">
+        <h3><span class="icon" style="background:#E8F0E0;">✅</span>设计成果</h3>
+        <ul>
+          <li>完成7个核心界面，覆盖手游主要玩法场景</li>
+          <li>将TV版中虚构的"众生之门"游戏具象化为可交互界面</li>
+          <li>建立了以森林绿为核心的统一视觉风格</li>
+          <li>将罗小黑IP的手绘治愈气质成功转化为UI语言</li>
+          <li>形成了配色、字体、组件的初步规范体系</li>
+          <li>兼顾了视觉表现与基础交互逻辑</li>
+        </ul>
+      </div>
+      <div class="overview-card" style="border-left-color:#E8A33D;">
+        <h3><span class="icon" style="background:#FFF3E0;">🔧</span>优化方向</h3>
+        <ul>
+          <li>补充交互动效演示（招募抽卡动画、页面转场）</li>
+          <li>完善空状态与加载状态的设计</li>
+          <li>细化按钮各状态（悬停/按下/禁用）的视觉差异</li>
+          <li>增加更多玩法界面（商店、背包、任务详情）</li>
+          <li>进行可用性测试，验证交互效率</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-title">众生之门 · 罗小黑战记手游UI概念设计</div>
+  <div>个人概念项目 · 仅用于作品集展示</div>
+  <div style="margin-top:8px; opacity:0.5;">罗小黑战记IP版权归原作者所有</div>
+</footer>
+
+</body>
+</html>
