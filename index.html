@@ -554,54 +554,47 @@
     .quest-panel-demo .quest-panel-img img { max-height: none !important; height: auto !important; width: 100% !important; }
     .quest-panel-demo > div:last-child { width: 100%; font-size: 12px; line-height: 1.8; }
 
-    /* 流程图 */
-    .flowchart { padding: 20px 16px; }
-    /* 有分支的行：移动端改为纵向卡片布局 */
-    .flow-row-branch {
-      flex-direction: column !important;
-      align-items: stretch !important;
-      gap: 0 !important;
-      margin-bottom: 16px !important;
-      margin-top: 0 !important;
-      padding: 14px !important;
-      background: #FAF8F2;
-      border-radius: 12px;
-      border-top: none !important;
+    /* 流程图 - 移动端保持横向布局，支持左右滚动 */
+    .flowchart { 
+      padding: 20px 16px; 
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
-    .flow-row-branch .flow-branch {
+    .flow-row { 
+      gap: 8px !important; 
+      margin-bottom: 14px !important; 
+      flex-wrap: nowrap !important; 
+      justify-content: flex-start !important;
+      width: max-content;
+      min-width: 100%;
+    }
+    .flow-branch {
       display: flex !important;
-      flex-direction: column !important;
-      gap: 0 !important;
-      width: 100% !important;
+      flex-direction: row !important;
+      gap: 8px !important;
+      width: auto !important;
     }
-    .flow-row-branch .flow-node {
-      width: 100% !important;
-      padding: 12px 16px !important;
-      font-size: 14px !important;
-      min-width: 0 !important;
+    .flow-node { 
+      padding: 8px 14px !important; 
+      font-size: 12px !important; 
+      min-width: 70px !important; 
+      width: auto !important;
       box-sizing: border-box;
     }
-    .flow-row-branch .flow-arrow {
-      transform: rotate(90deg) !important;
+    .flow-arrow { 
+      font-size: 14px !important; 
+      transform: none !important;
+      padding: 0 !important;
       text-align: center !important;
-      padding: 6px 0 !important;
-      font-size: 16px !important;
-      line-height: 1;
     }
-    /* 无分支的行：保持横向，缩小尺寸 */
-    .flow-row:not(.flow-row-branch) {
-      gap: 6px !important;
-      margin-bottom: 16px !important;
-      flex-wrap: wrap !important;
-      justify-content: center !important;
-    }
-    .flow-row:not(.flow-row-branch) .flow-node {
-      padding: 8px 12px !important;
-      font-size: 12px !important;
-      min-width: 56px !important;
-    }
-    .flow-row:not(.flow-row-branch) .flow-arrow {
-      font-size: 12px !important;
+    /* 移除纵向卡片样式 */
+    .flow-row-branch {
+      flex-direction: row !important;
+      align-items: center !important;
+      padding: 0 !important;
+      background: none !important;
+      border-radius: 0 !important;
+      margin-top: 0 !important;
     }
 
     /* 界面展示 */
