@@ -479,12 +479,98 @@
     margin-bottom: 8px;
   }
 
-  @media (max-width: 768px) {
-    .container { padding: 0 20px; }
-    .hero h1 { font-size: 32px; }
-    .overview-grid { grid-template-columns: 1fr; }
-    .type-row { flex-direction: column; gap: 8px; }
-    .type-meta { text-align: left; width: auto; }
+  /* ===== 平板适配 ===== */
+  @media (max-width: 900px) {
+    .container { padding: 0 24px; }
+    .hero { padding: 70px 24px 56px; }
+    .hero h1 { font-size: 38px; letter-spacing: 2px; }
+    .hero .subtitle { font-size: 17px; }
+    section { padding: 50px 0; }
+    .section-title { font-size: 24px; }
+    .color-palette { grid-template-columns: repeat(3, 1fr); }
+    .component-demo { gap: 14px; }
+  }
+
+  /* ===== 手机适配 ===== */
+  @media (max-width: 600px) {
+    .container { padding: 0 16px; }
+
+    /* 封面 */
+    .hero { padding: 56px 16px 44px; }
+    .hero h1 { font-size: 30px; letter-spacing: 2px; margin-bottom: 12px; }
+    .hero .subtitle { font-size: 15px; margin-bottom: 20px; letter-spacing: 1px; }
+    .hero .tags { gap: 8px; }
+    .hero .tag { padding: 5px 14px; font-size: 12px; }
+
+    /* 区块通用 */
+    section { padding: 40px 0; }
+    .section-title { font-size: 21px; gap: 8px; }
+    .section-title::before { height: 22px; width: 4px; }
+    .section-desc { font-size: 13px; margin-bottom: 24px; padding-left: 12px; }
+
+    /* 项目概述 */
+    .overview-grid { grid-template-columns: 1fr; gap: 14px; }
+    .overview-card { padding: 20px; }
+    .overview-card h3 { font-size: 15px; margin-bottom: 8px; }
+    .overview-card p, .overview-card ul { font-size: 13px; }
+
+    /* 关键词 */
+    .keywords { gap: 10px; padding: 10px 0; }
+    .keyword { padding: 10px 22px; font-size: 15px; }
+
+    /* 配色规范 */
+    .color-group { margin-bottom: 24px; }
+    .color-group-label { font-size: 13px; margin-bottom: 10px; }
+    .color-palette { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .color-swatch .swatch-top { height: 64px; }
+    .color-swatch .swatch-info { padding: 8px 10px; }
+    .color-swatch .swatch-name { font-size: 12px; }
+    .color-swatch .swatch-hex { font-size: 10px; }
+
+    /* 字体规范 */
+    .type-scale { padding: 20px; }
+    .type-row { flex-direction: column; gap: 6px; padding: 12px 0; }
+    .type-meta { text-align: left; width: auto; font-size: 11px; }
+    .type-h1 { font-size: 26px; }
+    .type-h2 { font-size: 20px; }
+    .type-h3 { font-size: 16px; }
+    .type-body { font-size: 14px; }
+    .type-caption { font-size: 13px; }
+    .type-mini { font-size: 11px; }
+
+    /* 组件规范 */
+    .component-section { margin-bottom: 24px; }
+    .component-label { font-size: 13px; margin-bottom: 10px; }
+    .component-demo { padding: 18px; gap: 12px; }
+    .component-demo img { max-height: 56px !important; }
+    .component-demo[style*="flex-start"] img { max-height: 200px !important; }
+
+    /* 流程图 */
+    .flowchart { padding: 20px; }
+    .flow-row { gap: 8px; margin-bottom: 14px; }
+    .flow-node { padding: 8px 14px; font-size: 12px; min-width: 70px; }
+    .flow-arrow { font-size: 14px; }
+
+    /* 界面展示 */
+    .screens-grid { gap: 24px; }
+    .screen-caption { padding: 14px 18px; }
+    .screen-caption h4 { font-size: 15px; }
+    .screen-caption p { font-size: 12px; }
+    .screen-caption .design-note { font-size: 11px; padding: 8px 12px; margin-top: 8px; }
+
+    /* 页脚 */
+    footer { padding: 28px 16px; font-size: 12px; }
+    footer .footer-title { font-size: 15px; }
+  }
+
+  /* ===== 小屏手机适配 ===== */
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 26px; }
+    .hero .subtitle { font-size: 13px; }
+    .keyword { padding: 8px 16px; font-size: 13px; }
+    .color-palette { grid-template-columns: repeat(2, 1fr); }
+    .type-h1 { font-size: 22px; }
+    .type-h2 { font-size: 18px; }
   }
 </style>
 </head>
