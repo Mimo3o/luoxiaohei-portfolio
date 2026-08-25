@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>有兽小厨房 · 手游UI设计 | 作品集</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    background: #FDF6F2;
+    color: #5A3A44;
+    line-height: 1.7;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+  /* ===== 顶部作品切换 ===== */
+  .portfolio-nav {
+    background: #5A3A44;
+    color: #FFF;
+    padding: 14px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 14px;
+  }
+  .portfolio-nav a {
+    color: #FFD9E2;
+    text-decoration: none;
+    padding: 6px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: all 0.3s;
+  }
+  .portfolio-nav a:hover, .portfolio-nav a.active {
+    background: #FF8FAB;
+    color: #FFF;
+    border-color: #FF8FAB;
+  }
+  .portfolio-nav .nav-label { opacity: 0.8; }
+
+  /* ===== 封面 ===== */
+  .hero {
+    background: linear-gradient(135deg, #FF9EB5 0%, #FFB6C1 40%, #FFD9A8 100%);
+    color: #5A3A44;
+    padding: 100px 40px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.25) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(255,255,255,0.15) 0%, transparent 40%);
+    animation: float 20s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-20px, -20px); }
+  }
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 16px;
+    position: relative;
+    text-shadow: 0 2px 20px rgba(255,255,255,0.5);
+  }
+  .hero .subtitle {
+    font-size: 20px;
+    opacity: 0.85;
+    margin-bottom: 32px;
+    position: relative;
+    letter-spacing: 2px;
+  }
+  .hero .tags {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero .tag {
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(10px);
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    border: 1px solid rgba(255,255,255,0.5);
+    color: #5A3A44;
+  }
+
+  /* ===== 通用区块 ===== */
+  section { padding: 70px 0; }
+  section:nth-child(even) { background: #FBE9EE; }
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #C45A76;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::before {
+    content: "";
+    width: 6px; height: 28px;
+    background: linear-gradient(180deg, #FF8FAB, #FFC0CB);
+    border-radius: 3px;
+  }
+  .section-desc {
+    color: #A07A86;
+    font-size: 15px;
+    margin-bottom: 36px;
+    padding-left: 18px;
+  }
+
+  /* ===== 项目概述 ===== */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .overview-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px;
+    border-left: 4px solid #FF8FAB;
+    box-shadow: 0 2px 12px rgba(196,90,118,0.06);
+  }
+  .overview-card h3 {
+    font-size: 17px;
+    color: #C45A76;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .overview-card h3 .icon {
+    width: 28px; height: 28px;
+    background: #FDEAF0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+  .overview-card p { font-size: 14px; color: #6E4A58; }
+  .overview-card ul { list-style: none; font-size: 14px; color: #6E4A58; }
+  .overview-card li { padding: 4px 0; padding-left: 16px; position: relative; }
+  .overview-card li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: #FF8FAB;
+    font-weight: bold;
+  }
+
+  /* ===== 设计思路 ===== */
+  .idea-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .idea-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px;
+    border-left: 4px solid #FFC0CB;
+    box-shadow: 0 2px 12px rgba(196,90,118,0.06);
+  }
+  .idea-card h3 {
+    font-size: 16px;
+    color: #C45A76;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .idea-card h3 .step {
+    width: 26px; height: 26px;
+    background: linear-gradient(135deg, #FF8FAB, #FFC0CB);
+    color: #FFF;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .idea-card p { font-size: 14px; color: #6E4A58; margin-bottom: 8px; }
+  .idea-card ul { list-style: none; font-size: 13px; color: #8A6876; }
+  .idea-card li { padding: 3px 0; padding-left: 14px; position: relative; }
+  .idea-card li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: #FF8FAB;
+    font-weight: bold;
+  }
+
+  /* ===== 关键词 ===== */
+  .keywords {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px 0;
+  }
+  .keyword {
+    background: #fff;
+    padding: 16px 36px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #C45A76;
+    box-shadow: 0 4px 16px rgba(196,90,118,0.08);
+    border: 2px solid transparent;
+    transition: all 0.3s;
+  }
+  .keyword:hover {
+    border-color: #FFC0CB;
+    transform: translateY(-2px);
+  }
+
+  /* ===== 配色规范 ===== */
+  .color-group { margin-bottom: 32px; }
+  .color-group-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #6E4A58;
+    margin-bottom: 14px;
+    padding-left: 8px;
+    border-left: 3px solid #FFC0CB;
+  }
+  .color-palette {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 14px;
+  }
+  .color-swatch {
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .color-swatch .swatch-top {
+    height: 80px;
+    position: relative;
+  }
+  .color-swatch .swatch-info {
+    padding: 10px 12px;
+  }
+  .color-swatch .swatch-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #5A3A44;
+    margin-bottom: 2px;
+  }
+  .color-swatch .swatch-hex {
+    font-size: 11px;
+    color: #888;
+    font-family: monospace;
+  }
+
+  /* ===== 字体规范 ===== */
+  .type-scale {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 2px 12px rgba(196,90,118,0.06);
+  }
+  .type-row {
+    display: flex;
+    align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px dashed #F0D8DE;
+    gap: 24px;
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-preview { flex: 1; }
+  .type-meta {
+    width: 200px;
+    text-align: right;
+    font-size: 12px;
+    color: #888;
+    font-family: monospace;
+  }
+  .type-h1 { font-size: 32px; font-weight: 800; color: #C45A76; }
+  .type-h2 { font-size: 24px; font-weight: 700; color: #C45A76; }
+  .type-h3 { font-size: 18px; font-weight: 600; color: #6E4A58; }
+  .type-body { font-size: 16px; font-weight: 400; color: #6E4A58; }
+  .type-caption { font-size: 14px; font-weight: 400; color: #A07A86; }
+  .type-mini { font-size: 12px; font-weight: 400; color: #B99AA6; }
+
+  /* ===== 组件规范 ===== */
+  .component-section { margin-bottom: 36px; }
+  .component-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #6E4A58;
+    margin-bottom: 14px;
+    padding-left: 8px;
+    border-left: 3px solid #FFC0CB;
+  }
+  .component-demo {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 2px 12px rgba(196,90,118,0.06);
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn {
+    padding: 10px 28px;
+    border-radius: 24px;
+    font-size: 15px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #FF8FAB, #FF6B8F);
+    color: #FFF;
+    box-shadow: 0 4px 12px rgba(255,107,143,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(255,107,143,0.45); }
+  .btn-secondary {
+    background: #fff;
+    color: #FF6B8F;
+    border: 2px solid #FF6B8F;
+  }
+  .btn-secondary:hover { background: #FFF0F4; }
+  .btn-text {
+    background: transparent;
+    color: #FF6B8F;
+    padding: 8px 16px;
+  }
+  .btn-text:hover { text-decoration: underline; }
+  .btn-disabled {
+    background: #EED9DE;
+    color: #C9AAB3;
+    cursor: not-allowed;
+  }
+
+  .card-demo {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .ui-card {
+    width: 220px;
+    background: #FFF;
+    border-radius: 18px;
+    border: 2px solid #FFC0CB;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(255,107,143,0.15);
+  }
+  .ui-card .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #C45A76;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .ui-card .card-content {
+    font-size: 13px;
+    color: #A07A86;
+    line-height: 1.8;
+  }
+  .ui-card-light {
+    background: #FFF9FA;
+    border-color: #FFD9E2;
+  }
+
+  .resource-bar-demo {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .res-item {
+    background: rgba(196,90,118,0.85);
+    backdrop-filter: blur(10px);
+    padding: 6px 16px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .res-icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+
+  .status-demo {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .status-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #FFF9FA;
+    border: 2px solid #FFD9E2;
+    border-radius: 14px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6E4A58;
+  }
+  .status-item .status-icon {
+    width: 26px; height: 26px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    background: #FDEAF0;
+  }
+  .status-item.danger { border-color: #FF8FAB; color: #C45A76; }
+
+  /* ===== 流程图 ===== */
+  .flowchart {
+    background: #fff;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 2px 12px rgba(196,90,118,0.06);
+    overflow-x: auto;
+  }
+  .flow-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .flow-node {
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 100px;
+  }
+  .flow-start {
+    background: linear-gradient(135deg, #FF8FAB, #FFB6C1);
+    color: #5A3A44;
+    box-shadow: 0 3px 10px rgba(255,107,143,0.3);
+  }
+  .flow-main {
+    background: linear-gradient(135deg, #FFB6C1, #FFD9A8);
+    color: #5A3A44;
+    box-shadow: 0 3px 10px rgba(255,180,190,0.35);
+  }
+  .flow-sub {
+    background: #FFF9FA;
+    color: #6E4A58;
+    border: 2px solid #FFC0CB;
+  }
+  .flow-end {
+    background: linear-gradient(135deg, #FFD9A8, #FFE8C2);
+    color: #8A5A3A;
+    box-shadow: 0 3px 10px rgba(255,200,150,0.3);
+  }
+  .flow-arrow {
+    font-size: 20px;
+    color: #FF6B8F;
+    font-weight: bold;
+  }
+  .flow-branch {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  /* ===== 界面展示 ===== */
+  .screens-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .screen-item {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(196,90,118,0.08);
+  }
+  .screen-item img {
+    width: 100%;
+    display: block;
+  }
+  .screen-caption {
+    padding: 20px 28px;
+    border-top: 1px solid #FBE9EE;
+  }
+  .screen-caption h4 {
+    font-size: 17px;
+    color: #C45A76;
+    margin-bottom: 6px;
+  }
+  .screen-caption p {
+    font-size: 13px;
+    color: #A07A86;
+  }
+  .screen-caption .design-note {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: #FFF3F6;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #8A5A70;
+    border-left: 3px solid #FF8FAB;
+  }
+
+  /* ===== 页脚 ===== */
+  footer {
+    background: #5A3A44;
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 40px;
+    font-size: 13px;
+  }
+  footer .footer-title {
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  footer a {
+    color: #FFD9E2;
+  }
+
+  /* ===== 平板适配 ===== */
+  @media (max-width: 900px) {
+    .container { padding: 0 24px; }
+    .hero { padding: 70px 24px 56px; }
+    .hero h1 { font-size: 38px; letter-spacing: 2px; }
+    .hero .subtitle { font-size: 17px; }
+    section { padding: 50px 0; }
+    .section-title { font-size: 24px; }
+    .color-palette { grid-template-columns: repeat(3, 1fr); }
+    .idea-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ===== 手机适配 ===== */
+  @media (max-width: 600px) {
+    .container { padding: 0 16px; }
+    .hero { padding: 56px 16px 44px; }
+    .hero h1 { font-size: 30px; letter-spacing: 2px; margin-bottom: 12px; }
+    .hero .subtitle { font-size: 15px; margin-bottom: 20px; letter-spacing: 1px; }
+    .hero .tags { gap: 8px; }
+    .hero .tag { padding: 5px 14px; font-size: 12px; }
+    section { padding: 40px 0; }
+    .section-title { font-size: 21px; gap: 8px; }
+    .section-title::before { height: 22px; width: 4px; }
+    .section-desc { font-size: 13px; margin-bottom: 24px; padding-left: 12px; }
+    .overview-grid { grid-template-columns: 1fr; gap: 14px; }
+    .overview-card { padding: 20px; }
+    .overview-card h3 { font-size: 15px; margin-bottom: 8px; }
+    .overview-card p, .overview-card ul { font-size: 13px; }
+    .idea-grid { grid-template-columns: 1fr; gap: 14px; }
+    .idea-card { padding: 20px; }
+    .idea-card h3 { font-size: 14px; }
+    .idea-card p, .idea-card ul { font-size: 12px; }
+    .keywords { gap: 10px; padding: 10px 0; }
+    .keyword { padding: 10px 22px; font-size: 15px; }
+    .color-group { margin-bottom: 24px; }
+    .color-palette { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .color-swatch .swatch-top { height: 64px; }
+    .type-scale { padding: 20px; }
+    .type-row { flex-direction: column; gap: 6px; padding: 12px 0; }
+    .type-meta { text-align: left; width: auto; font-size: 11px; }
+    .type-h1 { font-size: 26px; }
+    .type-h2 { font-size: 20px; }
+    .type-h3 { font-size: 16px; }
+    .type-body { font-size: 14px; }
+    .component-section { margin-bottom: 24px; }
+    .component-demo { padding: 18px; gap: 12px; }
+    .flowchart { padding: 20px 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .flow-row { gap: 8px !important; margin-bottom: 14px !important; flex-wrap: nowrap !important; justify-content: flex-start !important; width: max-content; min-width: 100%; }
+    .flow-branch { display: flex !important; flex-direction: row !important; gap: 8px !important; width: auto !important; }
+    .flow-node { padding: 8px 14px !important; font-size: 12px !important; min-width: 70px !important; }
+    .flow-arrow { font-size: 14px !important; }
+    .screens-grid { gap: 24px; }
+    .screen-caption { padding: 14px 18px; }
+    .screen-caption h4 { font-size: 15px; }
+    .screen-caption p { font-size: 12px; }
+    .screen-caption .design-note { font-size: 11px; padding: 8px 12px; margin-top: 8px; }
+    footer { padding: 28px 16px; font-size: 12px; }
+    footer .footer-title { font-size: 15px; }
+    .portfolio-nav { padding: 12px 16px; gap: 10px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== 作品集导航 ===== -->
+<div class="portfolio-nav">
+  <span class="nav-label">作品集 · Portfolio</span>
+  <a href="index.html">罗小黑战记 · 众生之门</a>
+  <a href="youshou.html" class="active">有兽小厨房</a>
+</div>
+
+<!-- ===== 封面 ===== -->
+<div class="hero">
+  <h1>有兽小厨房</h1>
+  <div class="subtitle">有兽焉 IP · Q版休闲经营手游UI概念设计</div>
+  <div class="tags">
+    <span class="tag">游戏UI</span>
+    <span class="tag">Q版卡通</span>
+    <span class="tag">休闲经营</span>
+    <span class="tag">治愈系</span>
+  </div>
+</div>
+
+<!-- ===== 项目概述 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">项目概述</div>
+    <div class="section-desc">一套可爱到想马上玩的甜品店经营界面</div>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <h3><span class="icon">🎮</span>项目定位</h3>
+        <p>基于《有兽焉》IP 的 Q 版休闲甜品经营手游 UI 概念设计。用马卡龙色系统一登录、主界面、玩法三个核心场景，把"接单-配餐-上菜"的经营玩法闭环用可视化组件完整表达。</p>
+      </div>
+      <div class="overview-card">
+        <h3><span class="icon">🎯</span>设计目标</h3>
+        <ul>
+          <li>还原《有兽焉》治愈系 IP 氛围，建立品牌认知</li>
+          <li>用一套可复用的组件规范支撑全部界面</li>
+          <li>让玩法规则一眼看懂，降低上手门槛</li>
+          <li>与《众生之门》形成风格对比，展示设计跨度</li>
+        </ul>
+      </div>
+      <div class="overview-card">
+        <h3><span class="icon">📄</span>交付内容</h3>
+        <ul>
+          <li>登录页（加载动线 + IP 氛围定调）</li>
+          <li>主界面（信息架构 + 场景叙事）</li>
+          <li>玩法界面（经营玩法闭环）</li>
+          <li>配色 / 字体 / 组件规范</li>
+        </ul>
+      </div>
+      <div class="overview-card">
+        <h3><span class="icon">📅</span>项目周期</h3>
+        <p>个人独立项目，设计周期约1周。</p>
+        <p style="margin-top:6px; font-size:12px; color:#B99AA6;">注：基于国漫 IP 的同人概念设计练习，非商业授权项目。</p>
+      </div>
+      <div class="overview-card" style="grid-column: 1 / -1;">
+        <h3><span class="icon">🛠️</span>设计工具</h3>
+        <p>即时设计（界面排版与组件库）、豆包AI / 即梦AI（图标与素材生成）、Photoshop（精修与切图）</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 设计思路 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">设计思路</div>
+    <div class="section-desc">从风格定调到玩法可视化的完整思考过程</div>
+    <div class="idea-grid">
+      <div class="idea-card">
+        <h3><span class="step">1</span>为什么做这个项目</h3>
+        <p>《众生之门》是暗色森林 + 手绘风，偏重氛围还原。但游戏 UI 实习岗会考察风格多样性，所以我刻意选了完全相反的调性——粉嫩 Q 版、治愈系、休闲经营，证明自己能驾驭不同风格的界面设计。</p>
+      </div>
+      <div class="idea-card">
+        <h3><span class="step">2</span>风格定调</h3>
+        <ul>
+          <li>马卡龙粉 / 奶黄 / 浅蓝三色系，营造温馨治愈的甜品店氛围</li>
+          <li>全圆角 + 软萌造型，符合 Q 版休闲游戏的目标用户画像</li>
+          <li>爪印 / 甜点 / 爱心贯穿全局，强化 IP 认知</li>
+        </ul>
+      </div>
+      <div class="idea-card">
+        <h3><span class="step">3</span>视觉层级与触控</h3>
+        <ul>
+          <li>三张图围绕"登录→主界面→玩法"完整流程，学会串联场景</li>
+          <li>每张图的主操作（开始 / 上菜）都放在底部拇指热区</li>
+          <li>资源栏独立置顶，功能按钮分区排布，信息一目了然</li>
+        </ul>
+      </div>
+      <div class="idea-card">
+        <h3><span class="step">4</span>组件化思维</h3>
+        <ul>
+          <li>资源栏、状态栏、按钮、订单气泡均为可复用组件，而非一次性画死</li>
+          <li>统一圆角、描边、投影参数，保证多界面一致性</li>
+          <li>预留按压态 / 选中态 / 禁用态，为开发交接做准备</li>
+        </ul>
+      </div>
+      <div class="idea-card">
+        <h3><span class="step">5</span>玩法可视化</h3>
+        <p>把"顾客订单→食材选择→上菜"的游戏规则用 UI 表达清楚，让玩家不读教程也能上手。这是游戏 UI 区别于普通 APP UI 的核心——做"玩法翻译"，而不只是画好看的皮。</p>
+      </div>
+      <div class="idea-card">
+        <h3><span class="step">6</span>与《众生之门》的关系</h3>
+        <p>两个作品为一对组合：《众生之门》展示还原 IP 氛围、做沉浸式界面的能力；《有兽小厨房》展示把握休闲品类、表达玩法逻辑的能力。一个偏氛围，一个偏交互，覆盖游戏 UI 的两大核心能力。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 关键词 ===== -->
+<section>
+  <div class="container">
+    <div class="keywords">
+      <span class="keyword">Q版卡通</span>
+      <span class="keyword">休闲经营</span>
+      <span class="keyword">治愈系</span>
+      <span class="keyword">玩法可视化</span>
+      <span class="keyword">组件化</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 配色规范 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">配色规范</div>
+    <div class="section-desc">马卡龙色系，围绕粉、黄、浅蓝建立低饱和治愈氛围</div>
+
+    <div class="color-group">
+      <div class="color-group-label">主色 · Primary</div>
+      <div class="color-palette">
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#FF6B8F;"></div>
+          <div class="swatch-info"><div class="swatch-name">主色深粉</div><div class="swatch-hex">#FF6B8F</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#FF8FAB;"></div>
+          <div class="swatch-info"><div class="swatch-name">主色粉</div><div class="swatch-hex">#FF8FAB</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#FFB6C1;"></div>
+          <div class="swatch-info"><div class="swatch-name">浅粉</div><div class="swatch-hex">#FFB6C1</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#C45A76;"></div>
+          <div class="swatch-info"><div class="swatch-name">文字深粉</div><div class="swatch-hex">#C45A76</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="color-group">
+      <div class="color-group-label">辅助色 · Secondary</div>
+      <div class="color-palette">
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#FFD9A8;"></div>
+          <div class="swatch-info"><div class="swatch-name">奶油黄</div><div class="swatch-hex">#FFD9A8</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#FFE8C2;"></div>
+          <div class="swatch-info"><div class="swatch-name">淡奶黄</div><div class="swatch-hex">#FFE8C2</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#B8D8F0;"></div>
+          <div class="swatch-info"><div class="swatch-name">浅蓝</div><div class="swatch-hex">#B8D8F0</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#FDEAF0;"></div>
+          <div class="swatch-info"><div class="swatch-name">浅粉底</div><div class="swatch-hex">#FDEAF0</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="color-group">
+      <div class="color-group-label">功能色 · Semantic</div>
+      <div class="color-palette">
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#FF8FAB;"></div>
+          <div class="swatch-info"><div class="swatch-name">危险 / 清除</div><div class="swatch-hex">#FF8FAB</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#7BC88B;"></div>
+          <div class="swatch-info"><div class="swatch-name">成功 / 上菜</div><div class="swatch-hex">#7BC88B</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#FFD166;"></div>
+          <div class="swatch-info"><div class="swatch-name">警告 / 金币</div><div class="swatch-hex">#FFD166</div></div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#9ED8DB;"></div>
+          <div class="swatch-info"><div class="swatch-name">信息 / 钻石</div><div class="swatch-hex">#9ED8DB</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 字体规范 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">字体规范</div>
+    <div class="section-desc">Q 版休闲游戏采用偏圆润的字形，6 级字号体系保证可读性与层级</div>
+    <div class="type-scale">
+      <div class="type-row">
+        <div class="type-preview"><div class="type-h1">有兽小厨房</div></div>
+        <div class="type-meta">H1 / 32px / 800 / 标题</div>
+      </div>
+      <div class="type-row">
+        <div class="type-preview"><div class="type-h2">今日订单</div></div>
+        <div class="type-meta">H2 / 24px / 700 / 区块标题</div>
+      </div>
+      <div class="type-row">
+        <div class="type-preview"><div class="type-h3">上菜完成 +20</div></div>
+        <div class="type-meta">H3 / 18px / 600 / 卡片标题</div>
+      </div>
+      <div class="type-row">
+        <div class="type-preview"><div class="type-body">来一份草莓纸杯蛋糕吧！</div></div>
+        <div class="type-meta">Body / 16px / 400 / 正文</div>
+      </div>
+      <div class="type-row">
+        <div class="type-preview"><div class="type-caption">倒计时 00:58 · 得分 0</div></div>
+        <div class="type-meta">Caption / 14px / 400 / 辅助信息</div>
+      </div>
+      <div class="type-row">
+        <div class="type-preview"><div class="type-mini">资源数量 · 版本信息</div></div>
+        <div class="type-meta">Mini / 12px / 400 / 角标</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 组件规范 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">组件规范</div>
+    <div class="section-desc">可复用的 UI 组件库，全圆角 + 软萌造型统一休闲调性</div>
+
+    <div class="component-section">
+      <div class="component-label">按钮系统 · Buttons</div>
+      <div class="component-demo" style="gap:16px; flex-wrap:wrap; align-items:center; justify-content:center;">
+        <div style="text-align:center;">
+          <button class="btn btn-primary">开始做甜点</button>
+          <div style="font-size:11px; color:#B99AA6; margin-top:6px;">主按钮 · 核心操作</div>
+        </div>
+        <div style="text-align:center;">
+          <button class="btn btn-secondary">上菜</button>
+          <div style="font-size:11px; color:#B99AA6; margin-top:6px;">次按钮 · 确认操作</div>
+        </div>
+        <div style="text-align:center;">
+          <button class="btn btn-text">清除</button>
+          <div style="font-size:11px; color:#B99AA6; margin-top:6px;">文字按钮 · 次要操作</div>
+        </div>
+        <div style="text-align:center;">
+          <button class="btn btn-disabled">配送中…</button>
+          <div style="font-size:11px; color:#B99AA6; margin-top:6px;">禁用态</div>
+        </div>
+      </div>
+      <div style="margin-top:12px; font-size:12px; color:#A07A86; padding-left:8px;">
+        主按钮（开始 / 上菜）采用高对比粉色渐变 + 大圆角，用于每屏唯一核心操作；次按钮为描边样式；文字按钮用于低权重操作（如清除）。所有按钮统一大圆角胶囊造型，符合 Q 版休闲调性，禁用态降低饱和度。
+      </div>
+    </div>
+
+    <div class="component-section">
+      <div class="component-label">资源栏 · Resource Bar</div>
+      <div class="component-demo">
+        <div class="resource-bar-demo">
+          <div class="res-item"><span class="res-icon" style="background:#FF6B8F;">❤</span>525</div>
+          <div class="res-item"><span class="res-icon" style="background:#FFD166;">🪙</span>1525</div>
+          <div class="res-item"><span class="res-icon" style="background:#9ED8DB;">💎</span>350</div>
+        </div>
+      </div>
+      <div style="margin-top:12px; font-size:12px; color:#A07A86; padding-left:8px;">
+        资源栏固定在主界面顶部，采用粉色半透明胶囊样式，图标 + 文字组合。爱心（红）、金币（黄）、钻石（蓝）用三种明确不同的主色区分，保证语义可读；增减时带轻微缩放反馈动画。
+      </div>
+    </div>
+
+    <div class="component-section">
+      <div class="component-label">状态栏 · Status Bar</div>
+      <div class="component-demo">
+        <div class="status-demo">
+          <div class="status-item"><span class="status-icon">⏱</span>倒计时 00:58</div>
+          <div class="status-item"><span class="status-icon">⭐</span>得分 0</div>
+          <div class="status-item danger"><span class="status-icon">😊</span>满意度</div>
+        </div>
+      </div>
+      <div style="margin-top:12px; font-size:12px; color:#A07A86; padding-left:8px;">
+        玩法界面的核心状态栏：倒计时、得分、满意度三项并行置顶。倒计时在最后一分钟进入危险态（描边变色），给玩家紧迫感；满意度预留星级 / 表情图标位，实时反馈表现。
+      </div>
+    </div>
+
+    <div class="component-section">
+      <div class="component-label">卡片系统 · Cards</div>
+      <div class="component-demo" style="justify-content:center;">
+        <div class="ui-card">
+          <div class="card-title">草莓纸杯蛋糕</div>
+          <div class="card-content">奶油 + 草莓 + 纸杯<br>订单需求卡 · 可点选</div>
+        </div>
+        <div class="ui-card ui-card-light">
+          <div class="card-title">食材托盘</div>
+          <div class="card-content">2×4 格子<br>选中态高亮描边</div>
+        </div>
+      </div>
+      <div style="margin-top:12px; font-size:12px; color:#A07A86; padding-left:8px;">
+        卡片采用粉色描边 + 大圆角，区分于硬朗的竞技类 UI。订单气泡卡承载顾客需求，食材托盘格支持选中态（描边高亮），点击反馈清晰。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 用户流程图 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">用户流程</div>
+    <div class="section-desc">从进入游戏到完成一单的完整用户路径</div>
+    <div class="flowchart">
+      <div class="flow-row">
+        <div class="flow-node flow-start">启动游戏</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node flow-start">登录页</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node flow-main">主界面</div>
+      </div>
+      <div class="flow-row" style="margin-top:30px;">
+        <div class="flow-node flow-main">主界面</div>
+        <div class="flow-branch">
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-sub">点击开始</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-sub">进入玩法</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-end">接单 / 配餐 / 上菜</div>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-node flow-main">主界面</div>
+        <div class="flow-branch">
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-sub">任务</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-end">领取奖励</div>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-node flow-main">主界面</div>
+        <div class="flow-branch">
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-sub">商城</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-end">购买资源</div>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-node flow-main">主界面</div>
+        <div class="flow-branch">
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-sub">好友</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node flow-end">互赠体力</div>
+        </div>
+      </div>
+      <div class="flow-row" style="margin-top:30px; border-top:2px dashed #F0D8DE; padding-top:20px;">
+        <div class="flow-node flow-sub">玩法结算</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node flow-sub">得分 / 满意度</div>
+        <span class="flow-arrow">↩</span>
+        <div class="flow-node flow-main">返回主界面</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 界面展示 ===== -->
+<section>
+  <div class="container">
+    <div class="section-title">界面展示</div>
+    <div class="section-desc">三张核心界面的设计要点说明</div>
+    <div class="screens-grid">
+
+      <div class="screen-item">
+        <img src="images/youshou_login.jpg" alt="登录页">
+        <div class="screen-caption">
+          <h4>登录页 · 有兽焉</h4>
+          <p>粉黄马卡龙配色 + 满屏甜点图案，第一眼传递治愈甜品游戏调性；爪印融入标题强化 IP 认知。</p>
+          <div class="design-note">💡 设计亮点：加载进度条上的奔跑小动物让"等待"变成有期待感的过渡，是登录页的动线巧思。</div>
+        </div>
+      </div>
+
+      <div class="screen-item">
+        <img src="images/youshou_home.png" alt="主界面">
+        <div class="screen-caption">
+          <h4>主界面 · 有兽小厨房</h4>
+          <p>粉色厨房场景 + 四只小动物围桌做甜点，界面不只是功能堆叠，而是有生活感的叙事画面。</p>
+          <div class="design-note">💡 设计亮点：左侧玩法/任务、右侧系统功能分区明确；资源栏独立置顶；"开始"作为唯一主按钮放底部拇指热区。</div>
+        </div>
+      </div>
+
+      <div class="screen-item">
+        <img src="images/youshou_game.png" alt="玩法界面">
+        <div class="screen-caption">
+          <h4>玩法界面 · 甜品经营</h4>
+          <p>顾客订单气泡 → 食材托盘 → 上菜/清除，三步完成一单的经营玩法闭环，规则一眼看懂。</p>
+          <div class="design-note">💡 设计亮点：倒计时 + 得分 + 满意度三项状态栏让玩家实时感知表现；订单需求可视化，不读教程也能上手。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 页脚 ===== -->
+<footer>
+  <div class="footer-title">有兽小厨房 · Q版休闲经营手游UI概念设计</div>
+  <div>基于《有兽焉》IP 的同人概念设计练习，非商业授权项目</div>
+  <div style="margin-top:12px;">设计工具：即时设计 / 豆包AI / 即梦AI / Photoshop</div>
+  <div style="margin-top:8px;"><a href="index.html">← 查看另一个作品：罗小黑战记 · 众生之门</a></div>
+</footer>
+
+</body>
+</html>
