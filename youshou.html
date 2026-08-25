@@ -319,6 +319,35 @@
     flex-wrap: wrap;
     align-items: center;
   }
+  /* 组件截图 */
+  .component-demo img.comp {
+    max-height: 84px;
+    border-radius: 10px;
+    border: 1px solid #F0D8DE;
+    box-shadow: 0 2px 10px rgba(196,90,118,0.10);
+    height: auto;
+    width: auto;
+    background: #fff;
+  }
+  .component-demo img.comp-tall {
+    max-height: 170px;
+  }
+  .component-demo img.comp-wide {
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+  }
+  .component-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .component-item .comp-caption {
+    font-size: 11px;
+    color: #B99AA6;
+  }
+  .component-item img { display: block; }
   .btn {
     padding: 10px 28px;
     border-radius: 24px;
@@ -850,71 +879,59 @@
 
     <div class="component-section">
       <div class="component-label">按钮系统 · Buttons</div>
-      <div class="component-demo" style="gap:16px; flex-wrap:wrap; align-items:center; justify-content:center;">
-        <div style="text-align:center;">
-          <button class="btn btn-primary">开始做甜点</button>
-          <div style="font-size:11px; color:#B99AA6; margin-top:6px;">主按钮 · 核心操作</div>
+      <div class="component-demo" style="gap:28px; flex-wrap:wrap; align-items:center; justify-content:center;">
+        <div class="component-item">
+          <img class="comp" src="images/comp_btn_start.png" alt="主按钮-开始">
+          <div class="comp-caption">主按钮 · 开始</div>
         </div>
-        <div style="text-align:center;">
-          <button class="btn btn-secondary">上菜</button>
-          <div style="font-size:11px; color:#B99AA6; margin-top:6px;">次按钮 · 确认操作</div>
+        <div class="component-item">
+          <img class="comp" src="images/comp_btn_serve.png" alt="次按钮-上菜">
+          <div class="comp-caption">次按钮 · 上菜</div>
         </div>
-        <div style="text-align:center;">
-          <button class="btn btn-text">清除</button>
-          <div style="font-size:11px; color:#B99AA6; margin-top:6px;">文字按钮 · 次要操作</div>
-        </div>
-        <div style="text-align:center;">
-          <button class="btn btn-disabled">配送中…</button>
-          <div style="font-size:11px; color:#B99AA6; margin-top:6px;">禁用态</div>
+        <div class="component-item">
+          <img class="comp" src="images/comp_btn_clear.png" alt="文字按钮-清除">
+          <div class="comp-caption">文字按钮 · 清除</div>
         </div>
       </div>
       <div style="margin-top:12px; font-size:12px; color:#A07A86; padding-left:8px;">
-        主按钮（开始 / 上菜）采用高对比粉色渐变 + 大圆角，用于每屏唯一核心操作；次按钮为描边样式；文字按钮用于低权重操作（如清除）。所有按钮统一大圆角胶囊造型，符合 Q 版休闲调性，禁用态降低饱和度。
+        主按钮（开始 / 上菜）采用高对比粉色渐变 + 大圆角，用于每屏唯一核心操作；清除为低权重操作的图标按钮。所有按钮统一大圆角胶囊造型，符合 Q 版休闲调性。
       </div>
     </div>
 
     <div class="component-section">
       <div class="component-label">资源栏 · Resource Bar</div>
       <div class="component-demo">
-        <div class="resource-bar-demo">
-          <div class="res-item"><span class="res-icon" style="background:#FF6B8F;">❤</span>525</div>
-          <div class="res-item"><span class="res-icon" style="background:#FFD166;">🪙</span>1525</div>
-          <div class="res-item"><span class="res-icon" style="background:#9ED8DB;">💎</span>350</div>
-        </div>
+        <img class="comp-wide" src="images/comp_resbar.png" alt="资源栏">
       </div>
       <div style="margin-top:12px; font-size:12px; color:#A07A86; padding-left:8px;">
-        资源栏固定在主界面顶部，采用粉色半透明胶囊样式，图标 + 文字组合。爱心（红）、金币（黄）、钻石（蓝）用三种明确不同的主色区分，保证语义可读；增减时带轻微缩放反馈动画。
+        资源栏固定在主界面顶部，采用粉色半透明胶囊样式，图标 + 文字组合。爱心（红）、金币（黄）、钻石（蓝）用三种明确不同的主色区分，保证语义可读。
       </div>
     </div>
 
     <div class="component-section">
       <div class="component-label">状态栏 · Status Bar</div>
       <div class="component-demo">
-        <div class="status-demo">
-          <div class="status-item"><span class="status-icon">⏱</span>倒计时 00:58</div>
-          <div class="status-item"><span class="status-icon">⭐</span>得分 0</div>
-          <div class="status-item danger"><span class="status-icon">😊</span>满意度</div>
-        </div>
+        <img class="comp-wide" src="images/comp_statusbar.png" alt="状态栏">
       </div>
       <div style="margin-top:12px; font-size:12px; color:#A07A86; padding-left:8px;">
-        玩法界面的核心状态栏：倒计时、得分、满意度三项并行置顶。倒计时在最后一分钟进入危险态（描边变色），给玩家紧迫感；满意度预留星级 / 表情图标位，实时反馈表现。
+        玩法界面的核心状态栏：倒计时、得分、满意度三项并行置顶。倒计时在最后一分钟进入危险态（描边变色），给玩家紧迫感；满意度实时反馈表现。
       </div>
     </div>
 
     <div class="component-section">
       <div class="component-label">卡片系统 · Cards</div>
-      <div class="component-demo" style="justify-content:center;">
-        <div class="ui-card">
-          <div class="card-title">草莓纸杯蛋糕</div>
-          <div class="card-content">奶油 + 草莓 + 纸杯<br>订单需求卡 · 可点选</div>
+      <div class="component-demo" style="gap:32px; justify-content:center;">
+        <div class="component-item">
+          <img class="comp" src="images/comp_order_bubble.png" alt="订单需求卡">
+          <div class="comp-caption">订单需求卡</div>
         </div>
-        <div class="ui-card ui-card-light">
-          <div class="card-title">食材托盘</div>
-          <div class="card-content">2×4 格子<br>选中态高亮描边</div>
+        <div class="component-item">
+          <img class="comp-tall" src="images/comp_tray.png" alt="食材托盘">
+          <div class="comp-caption">食材托盘 2×4</div>
         </div>
       </div>
       <div style="margin-top:12px; font-size:12px; color:#A07A86; padding-left:8px;">
-        卡片采用粉色描边 + 大圆角，区分于硬朗的竞技类 UI。订单气泡卡承载顾客需求，食材托盘格支持选中态（描边高亮），点击反馈清晰。
+        订单气泡卡承载顾客需求（甜点图标 + 进度条），食材托盘 2×4 分格支持食材选择，点选高亮反馈，让"接单-配餐"规则一眼看懂。
       </div>
     </div>
   </div>
