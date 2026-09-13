@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>雾港密语 · 乙女游戏UI设计 | 作品集</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    background: #F3EAD8;
+    color: #2C3E2C;
+    line-height: 1.7;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+  /* ===== 顶部作品切换 ===== */
+  .portfolio-nav {
+    background: #1F3A34;
+    color: #FFF;
+    padding: 14px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 14px;
+  }
+  .portfolio-nav a {
+    color: #C9A96A;
+    text-decoration: none;
+    padding: 6px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(201,169,106,0.4);
+    transition: all 0.3s;
+  }
+  .portfolio-nav a:hover, .portfolio-nav a.active {
+    background: #C9A96A;
+    color: #1F3A34;
+    border-color: #C9A96A;
+  }
+  .portfolio-nav .nav-label { opacity: 0.8; }
+
+  /* ===== 封面 ===== */
+  .hero {
+    background: linear-gradient(135deg, #0f1e1a 0%, #1F3A34 50%, #2d4a3a 100%);
+    color: #F3EAD8;
+    padding: 100px 40px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 40%, rgba(201,169,106,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(255,233,168,0.08) 0%, transparent 40%);
+    animation: float 20s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-20px, -20px); }
+  }
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: 8px;
+    margin-bottom: 16px;
+    position: relative;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    background: linear-gradient(180deg, #FFE9A8, #C9A96A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-size: 20px;
+    opacity: 0.9;
+    margin-bottom: 32px;
+    position: relative;
+    letter-spacing: 4px;
+    color: #C9A96A;
+  }
+  .hero .tags {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero .tag {
+    background: rgba(201,169,106,0.15);
+    backdrop-filter: blur(10px);
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    border: 1px solid rgba(201,169,106,0.4);
+    color: #EDE3CC;
+  }
+
+  /* ===== 通用区块 ===== */
+  section { padding: 70px 0; }
+  section:nth-child(even) { background: #E8DFC8; }
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1F3A34;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::before {
+    content: "";
+    width: 6px; height: 28px;
+    background: linear-gradient(180deg, #C9A96A, #FFE9A8);
+    border-radius: 3px;
+  }
+  .section-desc {
+    color: #6B7C6B;
+    font-size: 15px;
+    margin-bottom: 36px;
+    padding-left: 18px;
+  }
+
+  /* ===== 项目概述 ===== */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .overview-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px;
+    border-left: 4px solid #C9A96A;
+    box-shadow: 0 2px 12px rgba(31,58,52,0.06);
+  }
+  .overview-card h3 {
+    font-size: 17px;
+    color: #1F3A34;
+    margin-bottom: 12px;
+  }
+  .overview-card p {
+    font-size: 14px;
+    color: #4A5A4A;
+    line-height: 1.8;
+  }
+
+  /* ===== 设计关键词 ===== */
+  .keywords {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+  }
+  .keyword {
+    font-size: 20px;
+    padding: 10px 24px;
+    background: rgba(201,169,106,0.1);
+    border: 1px solid rgba(201,169,106,0.3);
+    border-radius: 8px;
+    color: #1F3A34;
+  }
+
+  /* ===== 配色规范 ===== */
+  .color-section {
+    margin-bottom: 24px;
+  }
+  .color-section h4 {
+    font-size: 15px;
+    color: #1F3A34;
+    margin-bottom: 12px;
+  }
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+  }
+  .color-item {
+    text-align: center;
+  }
+  .color-swatch {
+    width: 100%;
+    height: 70px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+  .color-name {
+    font-size: 13px;
+    color: #1F3A34;
+    font-weight: 600;
+  }
+  .color-hex {
+    font-size: 11px;
+    color: #888;
+  }
+
+  /* ===== 字体规范 ===== */
+  .font-spec {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 2px 12px rgba(31,58,52,0.06);
+  }
+  .font-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .font-row:last-child { border-bottom: none; }
+  .font-demo {
+    font-size: 20px;
+    color: #1F3A34;
+  }
+  .font-info {
+    font-size: 13px;
+    color: #888;
+    text-align: right;
+  }
+
+  /* ===== 界面展示 ===== */
+  .screen-item {
+    margin-bottom: 48px;
+  }
+  .screen-item h4 {
+    font-size: 2px;
+    color: #1F3A34;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .screen-item h4 .num {
+    width: 36px; height: 36px;
+    background: #1F3A34;
+    color: #FFE9A8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .screen-item .desc {
+    color: #6B7C6B;
+    font-size: 14px;
+    margin-bottom: 16px;
+    padding-left: 48px;
+  }
+  .screen-item img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    border: 1px solid rgba(201,169,106,0.2);
+  }
+
+  /* ===== 设计亮点 ===== */
+  .highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .highlight-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    border-top: 3px solid #C9A96A;
+    box-shadow: 0 2px 12px rgba(31,58,52,0.06);
+  }
+  .highlight-card h4 {
+    font-size: 16px;
+    color: #1F3A34;
+    margin-bottom: 8px;
+  }
+  .highlight-card p {
+    font-size: 13px;
+    color: #6B7C6B;
+    line-height: 1.7;
+  }
+
+  /* ===== 页脚 ===== */
+  footer {
+    background: #1F3A34;
+    color: rgba(201,169,106,0.6);
+    text-align: center;
+    padding: 32px;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部作品切换 -->
+<nav class="portfolio-nav">
+  <span class="nav-label">作品集：</span>
+  <a href="index.html">众生之门</a>
+  <a href="youshou.html">有兽小厨房</a>
+  <a href="mist-harbor.html" class="active">雾港密语</a>
+</nav>
+
+<!-- 封面 -->
+<div class="hero">
+  <h1>雾港密语</h1>
+  <div class="subtitle">MIST HARBOR · 乙女游戏UI概念设计</div>
+  <div class="tags">
+    <span class="tag">乙女向</span>
+    <span class="tag">剧情解谜</span>
+    <span class="tag">英伦复古</span>
+    <span class="tag">神秘学</span>
+    <span class="tag">GUI设计</span>
+  </div>
+</div>
+
+<!-- 项目概述 -->
+<section>
+  <div class="container">
+    <div class="section-title">项目概述</div>
+    <div class="section-desc">英伦雾港 · 星陨档案馆 · 以书信与占卜推进情感线</div>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <h3>📖 项目背景</h3>
+        <p>《雾港密语》是一款原创乙女向剧情手游概念设计。背景设定在20世纪初的英伦海港城市「雾港」，玩家扮演星陨档案馆新任馆主，通过占卜、书信与解谜，逐步揭开百年前那场「星陨之夜」的真相，并与四位性格迥异的男主建立情感联结。</p>
+      </div>
+      <div class="overview-card">
+        <h3>🎯 设计目标</h3>
+        <p>探索英伦神秘学复古风格的游戏界面设计，以「翻阅档案/卷宗/信札」为核心交互隐喻。所有UI元素都从档案馆中的物件提取——信纸、卷宗、星盘、塔罗牌、羽毛笔、黄铜台灯，让界面成为叙事的一部分。</p>
+      </div>
+      <div class="overview-card">
+        <h3>⚔️ 核心玩法</h3>
+        <p>角色收集与占卜（抽卡系统）· 剧情对话与选择肢 · 书信往来好感系统 · 档案馆探索解谜 · 塔罗牌章节推进</p>
+      </div>
+      <div class="overview-card">
+        <h3>🛠️ 设计工具</h3>
+        <p>AIGC（场景与角色素材）、HTML/CSS（UI界面精确排版）、Photoshop（素材处理与分层导出）。本作品为个人独立概念设计，完成5个核心界面的UI设计。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 设计关键词 -->
+<section>
+  <div class="container">
+    <div class="section-title">设计关键词</div>
+    <div class="section-desc">贯穿整个项目的视觉与体验调性</div>
+    <div class="keywords">
+      <span class="keyword">🌿 墨绿</span>
+      <span class="keyword">✨ 暗金</span>
+      <span class="keyword">🕯️ 烛光</span>
+      <span class="keyword">🌌 星象</span>
+      <span class="keyword">📜 卷宗</span>
+      <span class="keyword">🔮 神秘学</span>
+      <span class="keyword">🏰 英伦复古</span>
+    </div>
+  </div>
+</section>
+
+<!-- 配色规范 -->
+<section>
+  <div class="container">
+    <div class="section-title">配色规范</div>
+    <div class="section-desc">以墨绿书房 + 暗金烫印 + 深蓝夜空为主色板，搭配暖黄烛光作为点缀</div>
+
+    <div class="color-section">
+      <h4>主色系 · Primary</h4>
+      <div class="color-grid">
+        <div class="color-item">
+          <div class="color-swatch" style="background:#1F3A34;"></div>
+          <div class="color-name">墨绿</div>
+          <div class="color-hex">#1F3A34</div>
+        </div>
+        <div class="color-item">
+          <div class="color-swatch" style="background:#233B54;"></div>
+          <div class="color-name">暗蓝</div>
+          <div class="color-hex">#233B54</div>
+        </div>
+        <div class="color-item">
+          <div class="color-swatch" style="background:#6E2B34;"></div>
+          <div class="color-name">酒红</div>
+          <div class="color-hex">#6E2B34</div>
+        </div>
+        <div class="color-item">
+          <div class="color-swatch" style="background:#C9A96A;"></div>
+          <div class="color-name">暗金</div>
+          <div class="color-hex">#C9A96A</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="color-section">
+      <h4>辅助色系 · Secondary</h4>
+      <div class="color-grid">
+        <div class="color-item">
+          <div class="color-swatch" style="background:#FFE9A8;"></div>
+          <div class="color-name">辉光金</div>
+          <div class="color-hex">#FFE9A8</div>
+        </div>
+        <div class="color-item">
+          <div class="color-swatch" style="background:#F3EAD8;"></div>
+          <div class="color-name">奶油白</div>
+          <div class="color-hex">#F3EAD8</div>
+        </div>
+        <div class="color-item">
+          <div class="color-swatch" style="background:#0a0e14;"></div>
+          <div class="color-name">深夜空</div>
+          <div class="color-hex">#0A0E14</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:14px; color:#6B7C6B; margin-top:16px;">每位男主有专属色系：奥古斯特=暗金、埃德温=墨绿、塞拉斯=酒红、薇拉=暗蓝。卡牌边框和名牌随角色变色。</p>
+  </div>
+</section>
+
+<!-- 字体规范 -->
+<section>
+  <div class="container">
+    <div class="section-title">字体规范</div>
+    <div class="section-desc">统一的字号层级，标题加烫金渐变效果，正文用衬线宋体保证复古质感</div>
+    <div class="font-spec">
+      <div class="font-row">
+        <div class="font-demo">雾港密语</div>
+        <div class="font-info">大标题 · 96px / Bold / 烫金渐变</div>
+      </div>
+      <div class="font-row">
+        <div class="font-demo">埃德温 EDWIN</div>
+        <div class="font-info">角色名 · 28px / Medium</div>
+      </div>
+      <div class="font-row">
+        <div class="font-demo">「这份羊皮卷上的星图……和穹顶星盘指向的方位完全吻合。」</div>
+        <div class="font-info">正文对话 · 30px / Regular</div>
+      </div>
+      <div class="font-row">
+        <div class="font-demo">MIST HARBOR</div>
+        <div class="font-info">英文 · 20px / Times New Roman</div>
+      </div>
+      <div class="font-row">
+        <div class="font-demo">Ver 1.0.0</div>
+        <div class="font-info">辅助说明 · 12px / Light</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 界面展示 -->
+<section>
+  <div class="container">
+    <div class="section-title">界面展示</div>
+    <div class="section-desc">从登录到剧情的完整流程，覆盖5个核心界面</div>
+
+    <div class="screen-item">
+      <h4><span class="num">01</span> 登录页</h4>
+      <p class="desc">星陨档案馆哥特式建筑夜景为背景，星空与弯月烘托神秘氛围。中央金色大标题配衬线英文副标题，下方金边贵族风按钮「进入档案馆」。月相序列装饰顶部，呼应占卜主题。</p>
+      <img src="images/login.png" alt="登录页">
+    </div>
+
+    <div class="screen-item">
+      <h4><span class="num">02</span> 加载页</h4>
+      <p class="desc">背景进一步压暗，中央金色线框星盘装饰 + 「正在进入档案馆」提示，金边进度条 + 百分比。下方「星图小记」展示世界观短文案，在加载过程中传递叙事信息。</p>
+      <img src="images/loading.png" alt="加载页">
+    </div>
+
+    <div class="screen-item">
+      <h4><span class="num">03</span> 主界面</h4>
+      <p class="desc">档案馆书房桌面场景：黄铜台灯、星象仪、羊皮卷、塔罗牌散落桌面。左侧弹出「最新来信」剧情提示卡，右侧竖排功能栏（占卜/书信/档案/商店/图鉴），底部横向塔罗牌章节卡（星途→星轨→星渊→星陨）。</p>
+      <img src="images/main.png" alt="主界面">
+    </div>
+
+    <div class="screen-item">
+      <h4><span class="num">04</span> 占卜抽卡界面</h4>
+      <p class="desc">深蓝星空背景，中央紫色绒布占卜桌 + 水晶球 + 塔罗牌阵。四周四张男主卡牌（奥古斯特/埃德温/塞拉斯/薇拉），右下角连体抽卡按钮（占卜十次大+占卜一次小）。卡池主题「星沉雾港时」烫金标题。</p>
+      <img src="images/gacha.png" alt="抽卡界面">
+    </div>
+
+    <div class="screen-item">
+      <h4><span class="num">05</span> 剧情对话界面</h4>
+      <p class="desc">男主立绘融入场景（埃德温站在藏书室中），底部深墨绿半透明对话框 + 烫金边框 + 角色名牌。对话内容推进剧情，右下角「继续」提示引导翻页。</p>
+      <img src="images/dialogue.png" alt="剧情界面">
+    </div>
+  </div>
+</section>
+
+<!-- 设计亮点 -->
+<section>
+  <div class="container">
+    <div class="section-title">设计亮点</div>
+    <div class="section-desc">贯穿全项目的设计思考与决策</div>
+    <div class="highlights">
+      <div class="highlight-card">
+        <h4>🎨 统一视觉语言</h4>
+        <p>从登录到剧情，所有界面共享「墨绿+暗金+烫金边框」的设计系统，角色卡牌、按钮、对话框、卡片风格一致，形成完整的产品视觉规范。</p>
+      </div>
+      <div class="highlight-card">
+        <h4>📖 叙事性UI</h4>
+        <p>UI不是功能性面板，而是叙事的一部分——来信弹窗、塔罗章节、星图小记，都在推进世界观，让玩家在操作过程中自然沉浸。</p>
+      </div>
+      <div class="highlight-card">
+        <h4>👥 角色色彩系统</h4>
+        <p>四位男主各有专属色系，卡牌边框、名牌、卡面主色统一，方便玩家快速识别角色，也让每个角色有独立的视觉记忆点。</p>
+      </div>
+      <div class="highlight-card">
+        <h4>🏗️ 质感分层</h4>
+        <p>界面采用「场景底图 → 暗化层 → UI面板」三层结构，保证可读性的同时保留场景沉浸感，不会让UI浮在场景之上。</p>
+      </div>
+      <div class="highlight-card">
+        <h4>✨ 细节装饰</h4>
+        <p>月相序列、八芒星、菱形角花、烫金花纹——装饰元素克制但精准，服务于神秘学复古气质，不堆砌。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer>
+  <p>严汨 · UI设计作品集 · 雾港密语 © 2024</p>
+</footer>
+
+</body>
+</html>
